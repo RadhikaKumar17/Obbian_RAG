@@ -26,6 +26,8 @@ class Answer(BaseModel):
     index_version: str = ""
     mode: str = ""
     latency_ms: float = 0
+    usage: dict[str, int] | None = None
+    trace_id: str | None = None
 
 
 class Selection(BaseModel):

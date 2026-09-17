@@ -4,9 +4,17 @@ version = "0.1.0"
 description = "Standalone, citation-first rental-policy RAG service"
 requires-python = ">=3.12,<3.14"
 dependencies = [
-  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic-settings>=2.8,<3",
-  "groq>=0.25,<2", "fastembed>=0.7,<1", "qdrant-client>=1.14,<2", "rank-bm25>=0.2.2,<0.3",
-  "pypdf>=5.5,<7", "python-docx>=1.1,<2", "beautifulsoup4>=4.13,<5",
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.34,<1",
+  "pydantic-settings>=2.8,<3",
+  "groq>=0.25,<2",
+  "fastembed>=0.7,<1",
+  "qdrant-client>=1.14,<2",
+  "rank-bm25>=0.2.2,<0.3",
+  "pypdf>=5.5,<7",
+  "python-docx>=1.1,<2",
+  "beautifulsoup4>=4.13,<5",
+  "langsmith>=0.12.6",
 ]
 [dependency-groups]
 dev = ["pytest>=8.3,<10", "httpx>=0.28,<1", "ruff>=0.11,<1", "reportlab>=4.3,<5"]

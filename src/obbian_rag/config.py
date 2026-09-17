@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     api_key: SecretStr = SecretStr("")
     groq_api_key: SecretStr = SecretStr("")
     embedding_model: str = "BAAI/bge-small-en-v1.5"
-    generation_model: str = "llama-3.3-70b-versatile"
+    generation_model: str = "openai/gpt-oss-120b"
     dimensions: int = Field(default=384, ge=64, le=3072)
     data_dir: Path = Path("data")
     index_dir: Path = Path("storage")

@@ -3,6 +3,8 @@ import json
 import math
 import re
 
+from langsmith import traceable
+
 from .models import Selection
 
 STOP = set(
@@ -108,6 +110,7 @@ class Provider:
         self.settings = settings
         self.client = None
         self.embedder = None
+        self.last_usage = None
         if settings.provider == "groq":
             from fastembed import TextEmbedding
             from groq import Groq
@@ -135,14 +138,21 @@ class Provider:
             vectors.append([v / norm for v in vector])
         return vectors
 
-    def select(self, question, hits):
-        if not self.client:
-            return Selection(sufficient=bool(hits), evidence_ids=[h["chunk_id"] for h in hits[:1]])
-        result = self.client.chat.completions.create(
+    @traceable(name="groq-chat-completion", run_type="llm")
+    def _complete(self, messages):
+        return self.client.chat.completions.create(
             model=self.settings.generation_model,
             max_completion_tokens=600,
             temperature=0,
-            messages=[
+            messages=messages,
+            response_format={"type": "json_object"},
+        )
+
+    def select(self, question, hits):
+        if not self.client:
+            return Selection(sufficient=bool(hits), evidence_ids=[h["chunk_id"] for h in hits[:1]])
+        result = self._complete(
+            [
                 {
                     "role": "system",
                     "content": (
@@ -169,9 +179,14 @@ class Provider:
                         ensure_ascii=False,
                     ),
                 },
-            ],
-            response_format={"type": "json_object"},
+            ]
         )
+        if result.usage:
+            self.last_usage = {
+                "prompt_tokens": result.usage.prompt_tokens,
+                "completion_tokens": result.usage.completion_tokens,
+                "total_tokens": result.usage.total_tokens,
+            }
         try:
             return Selection.model_validate_json(result.choices[0].message.content or "{}")
         except (ValueError, IndexError):

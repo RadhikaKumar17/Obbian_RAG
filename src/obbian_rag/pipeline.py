@@ -1,6 +1,7 @@
 import time
 import uuid
 
+from langsmith import get_current_run_tree, traceable
 from rank_bm25 import BM25Okapi
 
 from .guardrails import inspect_query
@@ -43,6 +44,7 @@ class Pipeline:
                 hits.append(chunk)
         return sorted(hits, key=lambda c: (c["score"], c["coverage"]), reverse=True)[: self.settings.top_k]
 
+    @traceable(name="obbian-rag-ask", run_type="chain")
     def ask(self, question):
         started = time.monotonic()
         query, route = inspect_query(question)
@@ -75,4 +77,7 @@ class Pipeline:
                     result.citations = citations
                     result.answer = "\n\n".join(f"{c.quote} [{n}]" for n, c in enumerate(citations, 1))
         result.latency_ms = round((time.monotonic() - started) * 1000, 2)
+        result.usage = self.provider.last_usage
+        run = get_current_run_tree()
+        result.trace_id = str(run.id) if run else None
         return result
