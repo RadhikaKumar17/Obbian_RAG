@@ -118,7 +118,7 @@ class Provider:
             self.client = Groq(
                 api_key=settings.groq_api_key.get_secret_value(),
                 timeout=settings.timeout_seconds,
-                max_retries=1,
+                max_retries=5,
             )
             self.embedder = TextEmbedding(
                 model_name=settings.embedding_model, cache_dir=str(settings.model_cache_dir), threads=2
