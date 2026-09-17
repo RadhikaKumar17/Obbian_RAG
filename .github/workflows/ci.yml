@@ -1,0 +1,21 @@
+name: Python checks
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.22"
+          python-version: "3.12"
+      - run: uv sync --frozen
+      - run: uv run ruff check src tests
+      - run: uv run pytest -q
+      - run: uv run obbian-rag ingest
+      # Offline report is diagnostic only. Paid model release quality must be checked separately.
+      - run: uv run obbian-rag evaluate --split test --report reports/ci-offline.json --min-pass-rate 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: offline-evaluation
+          path: reports/ci-offline.json

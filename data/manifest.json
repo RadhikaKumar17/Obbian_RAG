@@ -1,0 +1,65 @@
+{
+  "corpus": "obbian-demo-policies",
+  "documents": [
+    {
+      "id": "cancellation",
+      "title": "Cancellation and refunds",
+      "version": "Cancellation Policy v1.4",
+      "path": "policies/cancellation.md",
+      "sha256": "df00f8a8c322f13d13395448f8f98172c7f7fe991b04a96685fcaca40c32556d",
+      "status": "approved",
+      "effective_date": "2026-09-17",
+      "provenance": "Snapshot of OBBIAN_BACKEND/data/seed.json; demo policy, not a legal policy approval"
+    },
+    {
+      "id": "deposit",
+      "title": "Security deposit timeline",
+      "version": "Refund Processing Guide",
+      "path": "policies/deposit.md",
+      "sha256": "b46f16be8d03661c3ad41e38bfc2c26431ac74a16a7609f4ee7db5eab038aece",
+      "status": "approved",
+      "effective_date": "2026-09-17",
+      "provenance": "Snapshot of OBBIAN_BACKEND/data/seed.json; demo policy, not a legal policy approval"
+    },
+    {
+      "id": "insurance",
+      "title": "Insurance and damage",
+      "version": "Insurance Coverage Guide",
+      "path": "policies/insurance.md",
+      "sha256": "ccbd0656b4bad867eff811f8d82a50e2535fc5d254dbdca8e4c8fb64f5550c64",
+      "status": "approved",
+      "effective_date": "2026-09-17",
+      "provenance": "Snapshot of OBBIAN_BACKEND/data/seed.json; demo policy, not a legal policy approval"
+    },
+    {
+      "id": "fuel",
+      "title": "Fuel and late returns",
+      "version": "Fuel & Return Policy",
+      "path": "policies/fuel.md",
+      "sha256": "8fefddaeca445f49d680ef8d103859aed02523d02ebe01e45139c04c6302bece",
+      "status": "approved",
+      "effective_date": "2026-09-17",
+      "provenance": "Snapshot of OBBIAN_BACKEND/data/seed.json; demo policy, not a legal policy approval"
+    },
+    {
+      "id": "payment",
+      "title": "Payment failed",
+      "version": "Payment Help",
+      "path": "policies/payment.md",
+      "sha256": "39a9b931eb8009ef48b97d4cf3e2c282711e69ce1d7d1dd4da223c2d4a80ab7e",
+      "status": "approved",
+      "effective_date": "2026-09-17",
+      "provenance": "Snapshot of OBBIAN_BACKEND/data/seed.json; demo policy, not a legal policy approval"
+    },
+    {
+      "id": "pickup",
+      "title": "Pickup checklist",
+      "version": "Pickup Guide",
+      "path": "policies/pickup.md",
+      "sha256": "dbea1113868790ba838589c7982f0c3fbfdfd73ed80fc274a7f1706fb0d49383",
+      "status": "approved",
+      "effective_date": "2026-09-17",
+      "provenance": "Snapshot of OBBIAN_BACKEND/data/seed.json; demo policy, not a legal policy approval"
+    }
+  ]
+}
